@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_custom_payment_methods_v2s",
+  "info": {
+    "displayName": "PaymentMethodsV2"
+  },
+  "options": {},
+  "attributes": {
+    "CashUSD": {
+      "type": "boolean",
+      "default": false
+    },
+    "CashCRC": {
+      "type": "boolean",
+      "default": false
+    },
+    "CreditCard": {
+      "type": "boolean",
+      "default": false
+    },
+    "Sinpe": {
+      "type": "boolean",
+      "default": false
+    },
+    "ElectronicInvoicing": {
+      "type": "boolean",
+      "default": false
+    },
+    "NormalBill": {
+      "type": "boolean",
+      "default": false
+    },
+    "CompleteInvoice": {
+      "type": "boolean",
+      "default": false
+    },
+    "SimplifiedInvoice": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "config": {}
+}

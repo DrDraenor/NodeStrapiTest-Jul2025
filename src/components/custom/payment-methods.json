@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_custom_payment_methods",
+  "info": {
+    "displayName": "PaymentMethods_Tooltips"
+  },
+  "options": {},
+  "attributes": {
+    "PaymentMethod": {
+      "type": "enumeration",
+      "enum": [
+        "Cash - USD",
+        "Cash - CRC",
+        "Credit Card",
+        "Sinpe",
+        "Electronic invoicing",
+        "Normal Bill",
+        "Complete invoice",
+        "Simplified invoice"
+      ]
+    },
+    "PaymentMethod_Tooltip": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

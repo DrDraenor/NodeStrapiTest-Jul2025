@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_custom_event_categories",
+  "info": {
+    "displayName": "EventCategories",
+    "icon": "calendar"
+  },
+  "options": {},
+  "attributes": {
+    "Category": {
+      "type": "enumeration",
+      "enum": [
+        "Religion/Spirituality\t",
+        "Sports",
+        "Market",
+        "Music",
+        "Culture"
+      ]
+    }
+  },
+  "config": {}
+}

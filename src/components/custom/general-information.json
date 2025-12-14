@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_custom_general_informations",
+  "info": {
+    "displayName": "GeneralInformation"
+  },
+  "options": {},
+  "attributes": {
+    "ElectronicInvoicing": {
+      "type": "boolean"
+    },
+    "FoundingDate": {
+      "type": "date"
+    },
+    "LanguagesSpoken": {
+      "type": "component",
+      "component": "custom.languages-spoken",
+      "repeatable": true
+    },
+    "paymentMethods": {
+      "type": "component",
+      "component": "custom.payment-methods",
+      "repeatable": true
+    },
+    "OperatingHours": {
+      "type": "component",
+      "component": "custom.opening-and-closing-times",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

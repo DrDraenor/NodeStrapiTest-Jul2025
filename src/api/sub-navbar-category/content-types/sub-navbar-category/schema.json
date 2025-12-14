@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sub_navbar_categories",
+  "info": {
+    "singularName": "sub-navbar-category",
+    "pluralName": "sub-navbar-categories",
+    "displayName": "SubNavbarCategory"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true,
+      "unique": true
+    },
+    "filters": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::filter.filter"
+    },
+    "Slug": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "sub_navbar_category_filter_list": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::sub-navbar-category-filter-list.sub-navbar-category-filter-list",
+      "inversedBy": "sub_navbar_category"
+    }
+  }
+}

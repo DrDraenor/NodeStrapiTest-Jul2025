@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_restaurant_filters_gastronomies",
+  "info": {
+    "displayName": "Gastronomy",
+    "icon": "restaurant"
+  },
+  "options": {},
+  "attributes": {
+    "GastronomyOption": {
+      "type": "enumeration",
+      "enum": [
+        "Vegan",
+        "Vegetarian",
+        "International (different types of food)",
+        "Costarican",
+        "Lebanese",
+        "Spanish",
+        "Italian",
+        "French",
+        "Mexican",
+        "Indian",
+        "Chinese",
+        "Venezuelan",
+        "Gluten Free"
+      ]
+    }
+  },
+  "config": {}
+}

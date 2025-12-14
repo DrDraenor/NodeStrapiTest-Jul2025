@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "main_navbar_categories",
+  "info": {
+    "singularName": "main-navbar-category",
+    "pluralName": "main-navbar-categories",
+    "displayName": "MainNavbarCategory"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true,
+      "unique": true
+    },
+    "sub_navbar_categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sub-navbar-category.sub-navbar-category"
+    }
+  }
+}

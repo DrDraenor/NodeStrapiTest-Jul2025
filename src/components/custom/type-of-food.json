@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_custom_type_of_foods",
+  "info": {
+    "displayName": "TypeOfFood",
+    "icon": "restaurant"
+  },
+  "options": {},
+  "attributes": {
+    "Pizza": {
+      "type": "boolean"
+    },
+    "FastFood": {
+      "type": "boolean"
+    },
+    "Sushi": {
+      "type": "boolean"
+    },
+    "BBQ": {
+      "type": "boolean"
+    },
+    "Fusion": {
+      "type": "boolean"
+    },
+    "Contemporary": {
+      "type": "boolean"
+    },
+    "Steakhouse": {
+      "type": "boolean"
+    },
+    "Seafood": {
+      "type": "boolean"
+    }
+  },
+  "config": {}
+}

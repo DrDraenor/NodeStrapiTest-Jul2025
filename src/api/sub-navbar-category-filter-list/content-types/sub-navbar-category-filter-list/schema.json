@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sub_navbar_category_filter_lists",
+  "info": {
+    "singularName": "sub-navbar-category-filter-list",
+    "pluralName": "sub-navbar-category-filter-lists",
+    "displayName": "SubNavbarCategory_FilterList"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "sub_navbar_category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::sub-navbar-category.sub-navbar-category",
+      "mappedBy": "sub_navbar_category_filter_list"
+    },
+    "Filters": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "custom.filters-template",
+      "repeatable": true
+    }
+  }
+}

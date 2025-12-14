@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_filter_groups_restaurant_filters_s",
+  "info": {
+    "displayName": "RestaurantFilters ",
+    "icon": "puzzle"
+  },
+  "options": {},
+  "attributes": {
+    "Gastronomy": {
+      "type": "component",
+      "component": "restaurant-filters.gastronomy",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

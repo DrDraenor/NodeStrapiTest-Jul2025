@@ -16,18 +16,24 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "5.16.1",
-    "@strapi/plugin-users-permissions": "5.16.1",
-    "@strapi/strapi": "5.16.1",
+    "@amicaldo/strapi-google-maps": "^2.0.2",
+    "@offset-dev/strapi-calendar": "^1.0.0",
+    "@strapi/plugin-cloud": "5.17.0",
+    "@strapi/plugin-users-permissions": "5.17.0",
+    "@strapi/strapi": "5.17.0",
     "better-sqlite3": "11.3.0",
     "fs-extra": "^10.0.0",
     "mime-types": "^2.1.27",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
+    "strapi-csv-import-export": "^0.0.6",
+    "strapi-import-export": "^0.0.1",
+    "strapi-location-picker": "^0.0.1",
+    "strapi-plugin-populate-all": "^1.2.3",
+    "strapi-plugin-tablify": "^1.0.3",
     "styled-components": "^6.0.0"
   },
-  "devDependencies": {},
   "engines": {
     "node": ">=18.0.0 <=22.x.x",
     "npm": ">=6.0.0"
@@ -35,5 +41,11 @@
   "strapi": {
     "uuid": "65c01339-d327-4cec-9206-68d7d08403a6",
     "installId": "997a0bd3c63453ee865b7e1875be9633bcfd27447d60238fe7bcc92197e14820"
+  },
+  "devDependencies": {
+    "@types/json2csv": "^5.0.7",
+    "@types/lodash": "^4.17.21",
+    "json2csv": "^6.0.0-alpha.2",
+    "lodash": "^4.17.21"
   }
 }

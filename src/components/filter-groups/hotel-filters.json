@@ -1,0 +1,173 @@
+{
+  "collectionName": "components_filter_groups_hotel_filters",
+  "info": {
+    "displayName": "HotelFilters",
+    "icon": "house"
+  },
+  "options": {},
+  "attributes": {
+    "IsFilterLegend": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "PropertyOptions": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "IsFilterLegend"
+            },
+            false
+          ]
+        }
+      },
+      "component": "hotel-filters.property-options-v2",
+      "repeatable": false
+    },
+    "PropertyOptions_Tooltip": {
+      "type": "text",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "IsFilterLegend"
+            },
+            true
+          ]
+        }
+      }
+    },
+    "PropertyOptions_Tooltips": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "IsFilterLegend"
+            },
+            true
+          ]
+        }
+      },
+      "component": "hotel-filters.property-options",
+      "repeatable": true
+    },
+    "AllPaymentMethodsAccepted": {
+      "type": "boolean",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "IsFilterLegend"
+            },
+            false
+          ]
+        }
+      },
+      "default": true
+    },
+    "PaymentMethods": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "AllPaymentMethodsAccepted"
+            },
+            true
+          ]
+        }
+      },
+      "component": "custom.payment-methods-v2",
+      "repeatable": false
+    },
+    "PaymentMethods_Tooltip": {
+      "type": "text",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "IsFilterLegend"
+            },
+            true
+          ]
+        }
+      }
+    },
+    "PaymentMethods_Tooltips": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "IsFilterLegend"
+            },
+            true
+          ]
+        }
+      },
+      "component": "custom.payment-methods",
+      "repeatable": true
+    },
+    "FoundingDate": {
+      "type": "date",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "IsFilterLegend"
+            },
+            false
+          ]
+        }
+      }
+    },
+    "Open247": {
+      "type": "boolean",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "IsFilterLegend"
+            },
+            false
+          ]
+        }
+      },
+      "default": true
+    },
+    "OpeningAndClosingTimes": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "Open247"
+            },
+            true
+          ]
+        }
+      },
+      "component": "custom.opening-and-closing-times-v2",
+      "repeatable": true
+    },
+    "Contacts": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "IsFilterLegend"
+            },
+            true
+          ]
+        }
+      },
+      "component": "custom.contact-info",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

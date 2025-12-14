@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_custom_number_filter_template_ints",
+  "info": {
+    "displayName": "NumberFilterTemplate_Int",
+    "icon": "filter"
+  },
+  "options": {},
+  "attributes": {
+    "Min": {
+      "type": "integer",
+      "default": 0
+    },
+    "Max": {
+      "type": "integer",
+      "default": 1000
+    }
+  },
+  "config": {}
+}

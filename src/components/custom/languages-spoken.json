@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_custom_languages_spokens",
+  "info": {
+    "displayName": "LanguagesSpoken"
+  },
+  "options": {},
+  "attributes": {
+    "Languages": {
+      "type": "enumeration",
+      "enum": [
+        "Spanish",
+        "English",
+        "Italian",
+        "French",
+        "German"
+      ]
+    }
+  },
+  "config": {}
+}

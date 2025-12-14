@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "main_page_texts",
+  "info": {
+    "singularName": "main-page-text",
+    "pluralName": "main-page-texts",
+    "displayName": "MainPageText"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true,
+      "unique": true
+    },
+    "TextBody": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    }
+  }
+}

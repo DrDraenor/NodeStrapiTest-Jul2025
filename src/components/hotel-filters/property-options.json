@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_hotel_filters_property_options",
+  "info": {
+    "displayName": "PropertyOptions_Tooltips",
+    "icon": "house"
+  },
+  "options": {},
+  "attributes": {
+    "PropertyOptions": {
+      "type": "enumeration",
+      "enum": [
+        "Parking on the Road",
+        "Private Parking",
+        "Wheelchair access",
+        "A/C",
+        "Wifi",
+        "All inclusive",
+        "Breakfast include",
+        "Adultos only",
+        "Family environment",
+        "Pets allowed"
+      ]
+    },
+    "PropertyOption_Tooltip": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

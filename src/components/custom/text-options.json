@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_custom_text_options",
+  "info": {
+    "displayName": "TextOptions",
+    "icon": "pencil"
+  },
+  "options": {},
+  "attributes": {
+    "OptionMainText": {
+      "type": "string",
+      "required": true
+    },
+    "OptionTooltip": {
+      "type": "text"
+    },
+    "Slug": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

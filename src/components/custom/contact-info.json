@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_custom_contact_infos",
+  "info": {
+    "displayName": "ContactInfo",
+    "icon": "phone"
+  },
+  "options": {},
+  "attributes": {
+    "Email": {
+      "type": "email"
+    },
+    "Website": {
+      "type": "string"
+    },
+    "Facebook": {
+      "type": "string"
+    },
+    "Instagram": {
+      "type": "string"
+    },
+    "TwitterOrX": {
+      "type": "string"
+    },
+    "PhoneNumber1": {
+      "type": "string"
+    },
+    "PhoneNumber2": {
+      "type": "string"
+    },
+    "WhatsAppNumber": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

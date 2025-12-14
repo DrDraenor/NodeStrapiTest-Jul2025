@@ -1,0 +1,47 @@
+{
+  "collectionName": "components_custom_day_range_oc_times",
+  "info": {
+    "displayName": "DayRangeOCTimes",
+    "icon": "clock"
+  },
+  "options": {},
+  "attributes": {
+    "OpenTime1": {
+      "type": "time"
+    },
+    "CloseTime1": {
+      "type": "time"
+    },
+    "ClosesMidday": {
+      "type": "boolean",
+      "default": false
+    },
+    "Open2": {
+      "type": "time",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "ClosesMidday"
+            },
+            true
+          ]
+        }
+      }
+    },
+    "Close2": {
+      "type": "time",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "ClosesMidday"
+            },
+            true
+          ]
+        }
+      }
+    }
+  },
+  "config": {}
+}

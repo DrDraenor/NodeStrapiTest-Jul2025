@@ -1,0 +1,52 @@
+{
+  "collectionName": "components_hotel_filters_property_options_v2s",
+  "info": {
+    "displayName": "PropertyOptionsV2",
+    "icon": "house"
+  },
+  "options": {},
+  "attributes": {
+    "ParkingOnTheRoad": {
+      "type": "boolean",
+      "required": false,
+      "default": false
+    },
+    "PrivateParking": {
+      "type": "boolean",
+      "default": false
+    },
+    "WheelchairAccess": {
+      "type": "boolean",
+      "default": false
+    },
+    "AC": {
+      "type": "boolean",
+      "default": false
+    },
+    "WiFi": {
+      "type": "boolean",
+      "default": false
+    },
+    "AllInclusive": {
+      "type": "boolean",
+      "default": false
+    },
+    "BreakfastIncluded": {
+      "type": "boolean",
+      "default": false
+    },
+    "AdultsOnly": {
+      "type": "boolean",
+      "default": false
+    },
+    "FamilyEnvironment": {
+      "type": "boolean",
+      "default": false
+    },
+    "PetsAllowed": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "config": {}
+}

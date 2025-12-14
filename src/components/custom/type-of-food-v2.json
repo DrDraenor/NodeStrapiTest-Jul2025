@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_custom_type_of_food_v2s",
+  "info": {
+    "displayName": "TypeOfFood-V2",
+    "icon": "restaurant"
+  },
+  "options": {},
+  "attributes": {
+    "TypesOfFood": {
+      "type": "enumeration",
+      "enum": [
+        "Pizza",
+        "Fast Food",
+        "Sushi",
+        "BBQ",
+        "Fusion",
+        "Contemporary",
+        "Steakhouse",
+        "Seafood"
+      ]
+    }
+  },
+  "config": {}
+}

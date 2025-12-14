@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_custom_gastronomies",
+  "info": {
+    "displayName": "Gastronomy",
+    "icon": "restaurant"
+  },
+  "options": {},
+  "attributes": {
+    "Vegan": {
+      "type": "boolean"
+    },
+    "Vegetarian": {
+      "type": "boolean"
+    },
+    "International": {
+      "type": "boolean"
+    },
+    "Costarican": {
+      "type": "boolean"
+    },
+    "Lebanese": {
+      "type": "boolean"
+    },
+    "Spanish": {
+      "type": "boolean"
+    },
+    "Italian": {
+      "type": "boolean"
+    },
+    "French": {
+      "type": "boolean"
+    },
+    "Mexican": {
+      "type": "boolean"
+    },
+    "Indian": {
+      "type": "boolean"
+    },
+    "GlutenFree": {
+      "type": "boolean"
+    }
+  },
+  "config": {}
+}

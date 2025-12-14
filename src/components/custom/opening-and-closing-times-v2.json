@@ -1,0 +1,47 @@
+{
+  "collectionName": "components_custom_opening_and_closing_times_v2s",
+  "info": {
+    "displayName": "OpeningAndClosingTimesV2",
+    "icon": "clock"
+  },
+  "options": {},
+  "attributes": {
+    "DayRange": {
+      "type": "enumeration",
+      "required": false,
+      "enum": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun",
+        "Mon-Fri",
+        "Mon-Sat",
+        "Mon-Sun",
+        "Sat-Sun"
+      ]
+    },
+    "IsClosed": {
+      "type": "boolean",
+      "default": false
+    },
+    "DayRangeOCTimes": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "IsClosed"
+            },
+            true
+          ]
+        }
+      },
+      "component": "custom.day-range-oc-times",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

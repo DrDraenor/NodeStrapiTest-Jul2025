@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_custom_opening_and_closing_times",
+  "info": {
+    "displayName": "OpeningAndClosingTimes",
+    "icon": "clock"
+  },
+  "options": {},
+  "attributes": {
+    "Day": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "Mon - Sat",
+        "Mon - Fri",
+        "Sat - Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun"
+      ]
+    },
+    "OpeningTime": {
+      "type": "time",
+      "required": false
+    },
+    "ClosingTime": {
+      "type": "time"
+    },
+    "IfClosed": {
+      "type": "enumeration",
+      "enum": [
+        "Closed"
+      ]
+    }
+  },
+  "config": {}
+}

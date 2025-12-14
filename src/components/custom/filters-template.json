@@ -1,0 +1,84 @@
+{
+  "collectionName": "components_custom_filters_templates",
+  "info": {
+    "displayName": "FiltersTemplate",
+    "icon": "filter"
+  },
+  "options": {},
+  "attributes": {
+    "FilterName": {
+      "type": "string",
+      "required": true
+    },
+    "FilterTooltip": {
+      "type": "text"
+    },
+    "ShowInFilterMenu": {
+      "type": "boolean",
+      "default": false
+    },
+    "Slug": {
+      "type": "string",
+      "required": true
+    },
+    "AltSlug_AllTrue": {
+      "type": "string"
+    },
+    "FilterType": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "SingleChoice",
+        "MultipleChoices",
+        "Number_Int",
+        "Other"
+      ]
+    },
+    "SingleChoiceOptions": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "FilterType"
+            },
+            "SingleChoice"
+          ]
+        }
+      },
+      "component": "custom.text-options",
+      "repeatable": true
+    },
+    "MultipleChoiceOptions": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "FilterType"
+            },
+            "MultipleChoices"
+          ]
+        }
+      },
+      "component": "custom.text-options",
+      "repeatable": true
+    },
+    "Number_Int_Params": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "FilterType"
+            },
+            "Number_Int"
+          ]
+        }
+      },
+      "component": "custom.number-filter-template-int",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}
