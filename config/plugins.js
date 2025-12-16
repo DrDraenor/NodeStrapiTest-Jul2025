@@ -6,14 +6,8 @@ module.exports = () => ({
 			relations: true,
 		},
 	},
-	'strapi-csv-import-export': {
-		config: {
-			authorizedExports: ["api::machine.machine", "api::hotel"],
-			authorizedImports: ["api::machine.machine"]
-		},
-	},
-	"custom-csv-import-export": {
+	"custom-csv-import-export-javascript": {
 		enabled: true,
-		resolve: "./src/plugins/custom-csv-import-export",
+		resolve: "./src/plugins/custom-csv-import-export-javascript",
 	},
 });

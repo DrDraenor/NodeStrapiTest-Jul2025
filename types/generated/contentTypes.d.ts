@@ -698,6 +698,12 @@ export interface ApiHotelHotel extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    Gallery: Schema.Attribute.Media<'images', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::hotel.hotel'>;
     Location: Schema.Attribute.JSON &

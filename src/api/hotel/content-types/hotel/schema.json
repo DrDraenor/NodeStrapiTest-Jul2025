@@ -75,6 +75,18 @@
       },
       "component": "filter-groups.hotel-filters",
       "repeatable": false
+    },
+    "Gallery": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "multiple": true,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }
