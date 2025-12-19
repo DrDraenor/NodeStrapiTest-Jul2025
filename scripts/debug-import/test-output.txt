@@ -1,0 +1,12 @@
+[2025-12-18 20:31:04.238] [33mwarn[39m: The associated subscription is cancelled. Switching to CE.
+--- TEST: stream ---
+Stream test ERROR: The "path" argument must be of type string or an instance of Buffer or URL. Received undefined
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string or an instance of Buffer or URL. Received undefined
+    at new ReadStream (node:internal/fs/streams:185:5)
+    at Object.createReadStream (node:fs:3109:10)
+    at currentFile.getStream (D:\FILES\Projects\NodeStrapiTest-Jul2025\my-strapi-project\node_modules\@strapi\upload\dist\server\services\upload.js:128:40)
+    at Object.upload (D:\FILES\Projects\NodeStrapiTest-Jul2025\my-strapi-project\node_modules\@strapi\upload\dist\server\services\provider.js:15:36)
+    at uploadFileAndPersist (D:\FILES\Projects\NodeStrapiTest-Jul2025\my-strapi-project\node_modules\@strapi\upload\dist\server\services\upload.js:227:48)
+    at async Promise.all (index 0)
+    at async Object.upload (D:\FILES\Projects\NodeStrapiTest-Jul2025\my-strapi-project\node_modules\@strapi\upload\dist\server\services\upload.js:159:29)
+    at async testUpload (D:\FILES\Projects\NodeStrapiTest-Jul2025\my-strapi-project\test-upload-v3.js:16:28)

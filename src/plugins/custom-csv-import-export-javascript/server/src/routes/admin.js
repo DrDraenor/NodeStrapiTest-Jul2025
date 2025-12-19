@@ -10,5 +10,13 @@ export default {
                 policies: [],
             },
         },
+        {
+            method: 'POST',
+            path: '/import/hotels',
+            handler: 'importController.importHotels',
+            config: {
+                policies: [],
+            },
+        },
     ],
 };

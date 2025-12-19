@@ -1,0 +1,3 @@
+--- UPLOAD METADATA DEBUG ---
+Testing refined property names (v5 style)...
+SUCCESS: ID 13, Name: test-metadata-v5.json, MIME: application/json

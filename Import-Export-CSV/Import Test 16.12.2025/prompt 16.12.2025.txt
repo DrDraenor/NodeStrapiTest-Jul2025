@@ -1,0 +1,6 @@
+Looks good.
+Not sure if I'm misunderstanding the interface part, but if possible I'd add a button on the plugin's page, which, when clicked, opens the file-choice dialog.
+For images I though about it and I think it's probably best if the images are uploaded automatically during the import process, if possible.
+Let's maybe create / use a more structured media file directory. Like /uploads/hotels/*hotel_name*.
+I've created an example .csv @...
+the images are in the media folder, as named in the .csv.
