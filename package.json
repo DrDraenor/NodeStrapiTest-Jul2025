@@ -4,7 +4,7 @@
   "private": true,
   "description": "A Strapi application",
   "scripts": {
-    "build": "strapi build",
+    "build": "npm run build --workspaces --if-present && strapi build",
     "console": "strapi console",
     "deploy": "strapi deploy",
     "dev": "strapi develop",
@@ -21,6 +21,7 @@
     "@strapi/plugin-users-permissions": "5.17.0",
     "@strapi/strapi": "5.17.0",
     "better-sqlite3": "11.3.0",
+    "custom-csv-import-export-javascript": "file:src/plugins/custom-csv-import-export-javascript",
     "fs-extra": "^10.0.0",
     "mime-types": "^2.1.27",
     "react": "^18.0.0",
@@ -43,5 +44,8 @@
     "@types/lodash": "^4.17.21",
     "json2csv": "^6.0.0-alpha.2",
     "lodash": "^4.17.21"
-  }
+  },
+  "workspaces": [
+    "src/plugins/*"
+  ]
 }

@@ -6,8 +6,23 @@ const csv = require('csv-parser');
 const mime = require('mime-types');
 
 module.exports = ({ strapi }) => ({
-    async importHotels(filePath, uploadedImages = []) {
+    async importData(contentTypeUid, filePath, uploadedImages = [], options = {}) {
         const results = [];
+        const { status = 'draft', user: triggeringUser } = options;
+
+        // Try to find the "Bot" user to attribute imports to a system user
+        const botUser = await strapi.db.query('admin::user').findOne({
+            where: {
+                $or: [
+                    { email: 'dan99@hotmail.it' },
+                    { username: 'Automated Import Via Custom Plugin' },
+                    { id: 3 } // Fallback to ID 3 as specified by user
+                ]
+            }
+        });
+
+        const attributionUser = botUser || triggeringUser;
+        console.log(`Attributing import to: ${attributionUser ? (attributionUser.username || attributionUser.email) : 'Unknown'} (ID: ${attributionUser?.id})`);
 
         // Parse CSV
         await new Promise((resolve, reject) => {
@@ -21,9 +36,18 @@ module.exports = ({ strapi }) => ({
         let successCount = 0;
         let failCount = 0;
 
+        // Determine destination folder category name from UID
+        const categoryName = contentTypeUid.split('.').pop(); // e.g. "hotel"
+
         for (const row of results) {
             try {
-                await this.processHotelRow(row, uploadedImages);
+                // Determine folder for this specific entry
+                const entryName = row.Name || row.name || row.Title || row.title || 'unnamed-entry';
+                const folderPath = `${categoryName}/${entryName}`;
+                // Folder creation stays with botUser if available, otherwise triggeringUser
+                const folderId = await this.getOrCreateFolder(folderPath, botUser || triggeringUser);
+
+                await this.processRow(contentTypeUid, row, uploadedImages, { status, folderId, user: attributionUser });
                 successCount++;
             } catch (err) {
                 console.error(`Failed to import row: ${row.Name || 'Unknown'}`, err);
@@ -34,58 +58,84 @@ module.exports = ({ strapi }) => ({
         return { total: results.length, success: successCount, failed: failCount };
     },
 
-    async processHotelRow(row, uploadedImages) {
-        // 1. Prepare base data
-        const hotelData = {
-            Name: row.Name,
-            TestNumberFilter: row.TestNumberFilter ? Number(row.TestNumberFilter) : null,
-            Description: row.Description, // English/Default description
-            // Handle Location (JSON)
-            Location: row.Location ? JSON.parse(row.Location) : null,
-            // Nested Properties
-            Properties: this.constructProperties(row),
+    async getOrCreateFolder(folderPath, user) {
+        const parts = folderPath.split('/').filter(p => p);
+        let parentId = null;
+
+        for (const part of parts) {
+            let folder = await strapi.db.query('plugin::upload.folder').findOne({
+                where: { name: part, parent: parentId }
+            });
+
+            if (!folder) {
+                folder = await strapi.plugin('upload').service('folder').create({
+                    name: part,
+                    parent: parentId
+                }, { user });
+            }
+            parentId = folder.id;
+        }
+        return parentId;
+    },
+
+    async processRow(uid, row, uploadedImages, options) {
+        const { status, folderId, user } = options;
+
+        // Basic dynamic mapping for some common fields
+        const data = {
+            Name: row.Name || row.name || row.Title || row.title,
+            Description: row.Description || row.description,
+            status: status === 'publish' ? 'published' : 'draft',
         };
 
-        // 2. Handle Media (MainImage and Gallery)
-        // We look for a file in uploadedImages whose 'originalFilename' ends with the CSV value
+        if (user && user.id) {
+            data.createdBy = user.id;
+            data.updatedBy = user.id;
+        }
 
+        // If it's a hotel, add specific mapping
+        if (uid === 'api::hotel.hotel') {
+            Object.assign(data, {
+                TestNumberFilter: row.TestNumberFilter ? Number(row.TestNumberFilter) : null,
+                Location: row.Location ? JSON.parse(row.Location) : null,
+                Properties: this.constructProperties(row),
+            });
+        }
+
+        // Handle Media with folderId
         if (row.MainImage) {
-            const imageId = await this.uploadMedia(row.MainImage, uploadedImages);
-            if (imageId) hotelData.MainImage = imageId;
+            const imageId = await this.uploadMedia(row.MainImage, uploadedImages, folderId, user);
+            if (imageId) data.MainImage = imageId;
         }
 
         if (row.Gallery) {
             const galleryFiles = row.Gallery.split(',').map(f => f.trim()).filter(f => f);
             const galleryIds = [];
             for (const file of galleryFiles) {
-                const id = await this.uploadMedia(file, uploadedImages);
+                const id = await this.uploadMedia(file, uploadedImages, folderId, user);
                 if (id) galleryIds.push(id);
             }
-            if (galleryIds.length > 0) hotelData.Gallery = galleryIds;
+            if (galleryIds.length > 0) data.Gallery = galleryIds;
         }
 
-        // 3. Create Default Entry (English)
-        // Strapi v5: use strapi.documents
-        const defaultEntry = await strapi.documents('api::hotel.hotel').create({
-            data: hotelData,
+        // Create Default Entry
+        console.log(`Creating entry for UID: ${uid} with author ID: ${user?.id || 'none'}`);
+        const defaultEntry = await strapi.documents(uid).create({
+            data: data,
             locale: 'en',
-            status: 'published'
+            status: data.status,
+            user // Strapi v5 often picks up user from context, but being explicit is safer
         });
 
         console.log(`Main entry created: ID ${defaultEntry.id}, DocumentID ${defaultEntry.documentId}`);
 
-        // 4. Handle Spanish Localization (if exists)
-        if (row.description_es) {
-            // Strapi v5: use update with a new locale to add a localization
-            await this.createLocalization(defaultEntry.documentId, 'es-CR', {
-                Name: row.Name,
-                Description: row.description_es,
-                TestNumberFilter: hotelData.TestNumberFilter,
-                Location: hotelData.Location,
-                Properties: hotelData.Properties,
-                MainImage: hotelData.MainImage,
-                Gallery: hotelData.Gallery
-            });
+        // Handle Spanish Localization
+        const esDesc = row.description_es || row.Description_es;
+        if (esDesc) {
+            await this.createLocalization(uid, defaultEntry.documentId, 'es-CR', {
+                ...data, // Copy other fields
+                Description: esDesc,
+            }, user);
         }
     },
 
@@ -158,7 +208,7 @@ module.exports = ({ strapi }) => ({
         };
     },
 
-    async uploadMedia(filename, uploadedImages) {
+    async uploadMedia(filename, uploadedImages, folderId, user) {
         try {
             // Find the file in uploadedImages
             // Use path.basename to compare just filenames if needed, or simple string inclusion
@@ -173,7 +223,6 @@ module.exports = ({ strapi }) => ({
                 return null;
             }
 
-            const uploadService = strapi.plugin('upload').service('upload');
             const fullPath = targetFile.filepath || targetFile.path;
 
             console.log(`Uploading media: ${filename} from ${fullPath}`);
@@ -185,9 +234,9 @@ module.exports = ({ strapi }) => ({
             // Normalize filename for storage/check (remove path if any from originalFilename)
             const storageFilename = path.basename(filename); // e.g. "MainImage.png"
 
-            // Check existence in DB by name
-            const existingFiles = await strapi.entityService.findMany('plugin::upload.file', {
-                filters: { name: storageFilename },
+            // Check existence in DB by name and folder
+            const existingFiles = await strapi.db.query('plugin::upload.file').findMany({
+                where: { name: storageFilename, folder: folderId },
             });
 
             if (existingFiles && existingFiles.length > 0) {
@@ -209,9 +258,9 @@ module.exports = ({ strapi }) => ({
 
             console.log(`Calling upload service for ${filename}`);
             const uploadedFiles = await strapi.plugin('upload').service('upload').upload({
-                data: {},
+                data: { fileInfo: { folder: folderId } }, // Fix: folder must be in fileInfo for v5
                 files: [fileData], // Array is safer in v5 for direct field-less upload
-            });
+            }, { user });
 
             if (uploadedFiles && uploadedFiles.length > 0) {
                 return uploadedFiles[0].id;
@@ -222,15 +271,21 @@ module.exports = ({ strapi }) => ({
         return null;
     },
 
-    async createLocalization(documentId, locale, data) {
+    async createLocalization(uid, documentId, locale, data, user) {
         try {
             console.log(`Linking localization for document ${documentId} with locale ${locale}`);
-            // In Strapi v5, update() with a new locale adds it to the document.
-            const newEntry = await strapi.documents('api::hotel.hotel').update({
+
+            const localizationData = { ...data };
+            if (user && user.id) {
+                localizationData.createdBy = user.id;
+                localizationData.updatedBy = user.id;
+            }
+
+            const newEntry = await strapi.documents(uid).update({
                 documentId,
-                data,
+                data: localizationData,
                 locale,
-                status: 'published'
+                status: data.status || 'published',
             });
             console.log(`Linked localization: ID ${newEntry.id}, Locale: ${newEntry.locale}`);
         } catch (err) {
